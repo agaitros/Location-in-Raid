@@ -16,7 +16,6 @@ IID_tm=None
 YYYY=None
 MM=None
 DD=None
-ValidMidsector = True
 
 
 def pathFinder(path, gDcm):
@@ -28,8 +27,7 @@ def pathFinder(path, gDcm):
     else:
         initialPath = path
         fields = startparse(initialPath)
-        fileSystemLoader(fields)
-        finalPath = dicomPathBuild();
+        finalPath = fileSystemLoader(fields)
         
     return finalPath
 
@@ -38,10 +36,13 @@ def startparse(row):
     return a;
     
 def fileSystemLoader(qLoad):
-    global IIDGroup, MidSector, MidLabel, MidInstitution, IIDdt, IID_tm, YYYY, MM, DD, ValidMidsector
+    global IIDGroup, MidSector, MidLabel, MidInstitution, IIDdt, IID_tm, YYYY, MM, DD
     t = 0
     cmplt = False
+    fsLoaderCount = 0
     IIDGroupCount = 0
+    MisErr = False
+    ValidMidsector = True
     while cmplt == False:
         #print "t= " + qLoad[t],
         count = qLoad[t].count(".")  #finding IIDgroup first for reference
@@ -86,12 +87,23 @@ def fileSystemLoader(qLoad):
             t+=1
         else:
             t = 1
+        
+        fsLoaderCount+=1    
+        if fsLoaderCount >= 30:
+            MisErr = True
+            break     
+        
+    dcmPath = dicomPathBuild(ValidMidsector, MisErr)
+    return dcmPath
             
-def dicomPathBuild():
+def dicomPathBuild(ValidMidsector, MisErr):
     m = None
     j = None 
     
-    if ValidMidsector == True:
+    if MisErr == True:
+        return "The File System Loader does not recognize the text you copied"
+    
+    elif ValidMidsector == True:
         m = "/MOUNT/" + MidLabel + "/" + MidInstitution + "/" + str(YYYY) + str(MM) + "/" + str(DD) + "/" + MidSector + "/" + IIDGroup + "/" + str(IID_tm) + "--" + str(IIDdt) + "*"            
         return m
     else:
