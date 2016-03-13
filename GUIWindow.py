@@ -15,7 +15,6 @@ class fsLoader(QtGui.QLabel):
         super(fsLoader, self).__init__()
         self.setWindowTitle("Your image is in...")
         
-        
     def wstartup(self, lcnt, ltext):   
         self.setGeometry(700, 400, lcnt, 100)  
         self.setAlignment(QtCore.Qt.AlignCenter)
