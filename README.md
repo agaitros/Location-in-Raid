@@ -13,8 +13,14 @@ To use the application, copy a single query result from the Images table in the 
 
 
 Future enhancements: 
+
 --improvements to algorithm
+
 --being able to perform the same for MMF documents
+
 --being able to copy back multiple rows in the images table
+
 --better error handling for when no query is copied
+
 --Close application on "Copy to Clipboard" to prevent extra click
+
