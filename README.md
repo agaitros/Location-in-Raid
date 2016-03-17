@@ -4,7 +4,7 @@ Finding the Location in Raid from the result of an SQL query pulled out of Clipb
 
 To create shortcut key
 
-1. Copy files in to common location, create shortcut for ShowMePath.py. 
+1. Copy files in to common location, extract LocationInRaidFinder zip, create shortcut for LocationInRaidFinder.py. 
 2. right click on shortcut and select properties
 3. in Shortcut tab of properties window, create a shortcut key combination
 
@@ -16,3 +16,5 @@ Future enhancements:
 --improvements to algorithm
 --being able to perform the same for MMF documents
 --being able to copy back multiple rows in the images table
+--better error handling for when no query is copied
+--Close application on "Copy to Clipboard" to prevent extra click
